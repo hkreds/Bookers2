@@ -1,5 +1,5 @@
 <main>
-  <p id="notice">You have created book successfully.</p>
+  <!--<p id="notice">You have created book successfully.</p>-->
   <div class="container">
     <div class="row">
       <div class="col-md-3">
@@ -11,13 +11,15 @@
           <tbody>
             <tr>
               <td>
-                <%= image_tag @user.get_profile_image(100, 67) %>
-                <br><%= link_to @user.name, user_path(@user.id) %>
+                <%= image_tag @book.user.get_profile_image(100, 100) %>
+                <br><%= link_to @book.user.name, user_path(@user.id) %>
               </td>
               <td><%= link_to @book.title, book_path %></td>
               <td><%= @book.body %></td>
-              <td><%=  link_to "Edit", edit_book_path(@book.id), class: 'btn btn-sm btn-success' %></td>
-              <td><%= link_to 'Destroy', book_path, method: :delete, class: 'btn btn-sm btn-danger', "data-confirm" => "本当に消しますか？" %></td>
+              <% if @book.user == current_user %>
+                <td><%=  link_to "Edit", edit_book_path(@book.id), class: 'btn btn-sm btn-success' %></td>
+                <td><%= link_to 'Destroy', book_path, method: :delete, class: 'btn btn-sm btn-danger', "data-confirm" => "本当に消しますか？" %></td>
+              <% end %>
             </tr>
           </tbody>
         </table>
